@@ -10,14 +10,13 @@ const Repos = () => {
             .then(res => {
                 let data = res.data;
                 setDataRepo(data.map(el => {
-                    console.log(data);
                     return { id: el.id, name: el.name, language: el.language, url: el.clone_url, description: el.description }
                 }))
             })
     }, []);
 
     return (
-        <div>
+        <div style={{ marginTop : "-33px"}}>
             <ol>
                 {dataRepo &&
                     dataRepo.map((item, index) => {

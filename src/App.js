@@ -34,7 +34,6 @@ function App() {
 
   const handleSearch = (event) => {
     setUserInput(event.target.value);
-    console.log(event.target.value);
   }
 
   const handleSubmit = () => {
@@ -58,8 +57,12 @@ function App() {
         </Header>
       </div>
       <div className="container" text style={{ justifyContent: "center", marginTop: "30px" }}>
-        <Header as='h1'>Github User Finder</Header>
+        <Header as='h1'>
+        <Icon name="github"/>
+        Github User Finder
+        </Header>
         <p>Type Github username below, You'll get useful information after click submit or press enter button</p>
+        <p>This application is under development, the search button just can't be implemented to display the repository</p>
         <div className="search">
           <Form onSubmit={handleSubmit}>
             <Form.Group>
