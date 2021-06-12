@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Form, Card, Image, Icon } from 'semantic-ui-react'
+import { Form, Card, Image, Icon, Container, Header } from 'semantic-ui-react'
 import './App.css';
 import Repos from './Repos';
 
@@ -18,7 +18,6 @@ function App() {
     fetch('https://api.github.com/users/Abdullah')
       .then(res => res.json())
       .then(data => {
-        // console.log(data);
         setData(data);
       });
   }, []);
@@ -53,55 +52,61 @@ function App() {
 
   return (
     <div>
-      <div className="navbar">MyTens Assesment Project</div>
-      <div className="search">
-        <Form onSubmit={handleSubmit}>
-          <Form.Group>
-            <Form.Input
-              placeholder='Name'
-              name='name' onChange={handleSearch}
-            />
-            <Form.Button content='Submit' />
-          </Form.Group>
-        </Form>
+      <div className="navbar">
+        <Header as="h1">
+          MyTens Assesment Project
+        </Header>
       </div>
-      {error ? (<h1 className="error"> User "{userInput}" {error} </h1>) : (
-        <div className="card">
-          <Card>
-            <Image src={avatar} wrapped ui={false} />
-            <Card.Content>
-              <Card.Header>{name}</Card.Header>
-              {/* <Card.Header>{userName}</Card.Header> */}
-              <Card.Meta>
-                <span className='date'>Joined in {createdAt}</span>
-              </Card.Meta>
-              {/* <Card.Description>
-                    Matthew is a musician living in Nashville.
-                  </Card.Description> */}
-            </Card.Content>
-            <Card.Content extra>
-              <a>
-                <Icon name='users' />
-                {followers} followers
-                  </a>
-            </Card.Content>
-            <Card.Content extra>
-              <a>
-                <Icon name='user plus' />
-                {following} following
-                  </a>
-            </Card.Content>
-            <Card.Content extra>
-              <a>
-                <Icon name='archive' />
-                {repos} repos
-                  </a>
-            </Card.Content>
-          </Card>
+      <div className="container" text style={{ justifyContent: "center", marginTop: "30px" }}>
+        <Header as='h1'>Github User Finder</Header>
+        <p>Type Github username below, You'll get useful information after click submit or press enter button</p>
+        <div className="search">
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Input
+                placeholder='Name'
+                name='name' onChange={handleSearch}
+              />
+              <Form.Button content='Submit' />
+            </Form.Group>
+          </Form>
         </div>
-      )}
-      
-      <Repos />
+        <div className="inner-container">
+          {error ? (<h1 className="error"> User "{userInput}" {error} </h1>) : (
+            <div className="card">
+              <Card style={{ marginBottom: "50px", height: "max-content" }}>
+                <Image src={avatar} wrapped ui={false} />
+                <Card.Content>
+                  <Card.Header>{name}</Card.Header>
+                  <Card.Meta>
+                    <span className='date'>Joined in {createdAt}</span>
+                  </Card.Meta>
+                </Card.Content>
+                <Card.Content extra>
+                  <a>
+                    <Icon name='users' />
+                    {followers} followers
+                  </a>
+                </Card.Content>
+                <Card.Content extra>
+                  <a>
+                    <Icon name='user plus' />
+                    {following} following
+                  </a>
+                </Card.Content>
+                <Card.Content extra>
+                  <a>
+                    <Icon name='archive' />
+                    {repos} repos
+                  </a>
+                </Card.Content>
+              </Card>
+            </div>
+          )}
+
+          <Repos />
+        </div>
+      </div>
     </div>
   );
 }
